@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C++ → Python</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="bar">
+  <h1>C++ <span class="arrow">→</span> Python</h1>
+  <p class="sub">PLY · LALR(1) · AST · інтерпретатор · трансляція</p>
+  <div class="controls">
+    <label>приклад
+      <select id="example"></select>
+    </label>
+    <label>пріоритети
+      <select id="mode">
+        <option value="full">повна таблиця</option>
+        <option value="no-else">без правила для else</option>
+        <option value="none">майже порожня</option>
+      </select>
+    </label>
+    <button id="go" title="Ctrl+Enter">Транслювати</button>
+  </div>
+</header>
+
+<main class="grid">
+  <section class="left">
+    <div class="pane-title">вхідний код</div>
+    <div class="editor">
+      <pre class="gutter" id="gutter" aria-hidden="true"></pre>
+      <div class="code-wrap">
+        <pre class="hl" id="hl" aria-hidden="true"></pre>
+        <textarea id="source" spellcheck="false" wrap="off"></textarea>
+      </div>
+    </div>
+    <div class="pane-title">stdin для cin</div>
+    <textarea id="stdin" class="stdin" spellcheck="false" placeholder="наприклад: 6"></textarea>
+    <div id="status" class="status"></div>
+  </section>
+
+  <section class="right">
+    <nav class="tabs" role="tablist">
+      <button role="tab" data-tab="tree" class="on">Дерево AST</button>
+      <button role="tab" data-tab="py">Python</button>
+      <button role="tab" data-tab="out">Вивід</button>
+      <button role="tab" data-tab="tokens">Токени</button>
+    </nav>
+    <div class="tab on" id="tab-tree">
+      <div class="tree-tools">
+        <button id="fit">вмістити</button>
+        <button id="expand">розгорнути все</button>
+        <span class="hint">клік по вузлу згортає гілку · колесо масштабує · вузол підсвічує рядок</span>
+      </div>
+      <svg id="tree"></svg>
+      <div id="tip" class="tip"></div>
+    </div>
+    <div class="tab" id="tab-py"><pre id="py" class="code"></pre></div>
+    <div class="tab" id="tab-out">
+      <div class="out-grid">
+        <div>
+          <div class="pane-title">інтерпретатор AST</div>
+          <pre id="out-interp" class="code"></pre>
+          <div id="meta-interp" class="meta"></div>
+        </div>
+        <div>
+          <div class="pane-title">згенерований Python</div>
+          <pre id="out-py" class="code"></pre>
+          <div id="meta-py" class="meta"></div>
+        </div>
+      </div>
+      <div id="same" class="same"></div>
+    </div>
+    <div class="tab" id="tab-tokens">
+      <table class="tokens"><thead><tr><th>рядок:поз</th><th>тип</th><th>значення</th></tr></thead><tbody id="tok"></tbody></table>
+    </div>
+  </section>
+</main>
+
+<script src="d3.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
