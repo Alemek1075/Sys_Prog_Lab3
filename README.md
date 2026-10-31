@@ -1,3 +1,3 @@
 # Sys_Prog_Lab3
 
-Відеозахист: 
+Відеозахист: https://youtu.be/VbYN7tskPlA
