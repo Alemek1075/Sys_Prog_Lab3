@@ -63,9 +63,11 @@ def main(argv=None):
 
     stdin = args.stdin
     if stdin is None and (args.run or args.run_py):
-        stdin = '' if sys.stdin.isatty() and 'cin' not in source else None
-        if stdin is None:
-            print('введіть дані для cin (Ctrl+Z, Enter у Windows або Ctrl+D для завершення):', file=sys.stderr)
+        if 'cin' not in source:
+            stdin = ''
+        else:
+            if sys.stdin.isatty():
+                print('введіть дані для cin, потім Ctrl+Z і Enter (Windows) або Ctrl+D:', file=sys.stderr)
             stdin = sys.stdin.read()
     stdin = (stdin or '').replace('\\n', '\n')
 
